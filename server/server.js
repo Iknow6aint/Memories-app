@@ -18,6 +18,7 @@ app.use(cors());
 app.use('/posts', postRoutes)
 
 //mongoDB init
+
 const CONNECTION_URL = 'mongodb+srv://iknowsaint:jajabone@cluster0.qzlrfzl.mongodb.net/?retryWrites=true&w=majority';
 mongoose.set("strictQuery", false);
 mongoose.connect(CONNECTION_URL, () => {
