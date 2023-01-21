@@ -20,10 +20,21 @@ app.use('/posts', postRoutes)
 //mongoDB init
 
 const CONNECTION_URL = 'mongodb+srv://iknowsaint:jajabone@cluster0.qzlrfzl.mongodb.net/?retryWrites=true&w=majority';
-mongoose.set("strictQuery", false);
-mongoose.connect(CONNECTION_URL, () => {
-    console.log(`Connected to MongoDB`)
-    app.listen(PORT, () => {
-        console.log(`Listening at ${PORT}`);
-    })
-});
+mongoose
+    .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() =>
+        app.listen(PORT, () =>
+            console.log(`Server Running on Port: http://localhost:${PORT}`)
+        )
+    )
+    .catch((error) => console.log(`${error} did not connect`));
+mongoose.set("useFindAndModify", false);
+
+// mongoose.set("useFindAndModify", false);
+// mongoose.set("strictQuery", false);
+// mongoose.connect(CONNECTION_URL, () => {
+//     console.log(`Connected to MongoDB`)
+//     app.listen(PORT, () => {
+//         console.log(`Listening at ${PORT}`);
+//     })
+// });
