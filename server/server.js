@@ -12,14 +12,19 @@ const PORT = 5000
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
+const corsOption = {
+    origin: ['http://localhost:3000'],
+};
+app.use(cors(corsOption));
+//if you want in every domain then
+app.use(cors())
 
 //routes init
 app.use('/posts', postRoutes)
 
 //mongoDB init
 
-const CONNECTION_URL = 'mongodb+srv://iknowsaint:jajabone@cluster0.qzlrfzl.mongodb.net/?retryWrites=true&w=majority';
+const CONNECTION_URL = 'mongodb+srv://admin:Jajabone@cluster0.qzlrfzl.mongodb.net/?retryWrites=true&w=majority';
 mongoose
     .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() =>
