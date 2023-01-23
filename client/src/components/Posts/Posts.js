@@ -1,9 +1,8 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Post from './Post/Post'
 import useStyles from './styles'
 import { Grid, CircularProgress } from '@material-ui/core'
-
 const Posts = ({ setCurrentId }) => {
     const classes = useStyles();
     const posts = useSelector((state) => state.posts);
