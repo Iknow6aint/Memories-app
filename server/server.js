@@ -22,7 +22,7 @@ app.use(cors())
 
 //routes init
 app.use('/posts', postRoutes)
-app.use('/user')
+app.use('/user', userRoutes)
 
 //mongoDB init
 
