@@ -4,6 +4,7 @@ import mongoose from "mongoose"
 import express from "express"
 
 import postRoutes from './routes/posts.js'
+import userRoutes from './routes/user.js'
 
 const app = express();
 const PORT = 5000
@@ -21,6 +22,7 @@ app.use(cors())
 
 //routes init
 app.use('/posts', postRoutes)
+app.use('/user')
 
 //mongoDB init
 

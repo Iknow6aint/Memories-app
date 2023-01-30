@@ -8,9 +8,13 @@ import Input from './Input';
 import useStles from './styles'
 import Icon from './icons'
 import * as actionType from '../../constants/actionType';
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
+import { signin, signup } from '../../actions/auth'
+
 
 
 const Auth = () => {
+    const [form, setForm] = useState(initialState);
     const [showPassword, setShowPassword] = useState(false);
     const [isSignup, setIsSignup] = useState(false)
     const classes = useStles();
@@ -18,11 +22,18 @@ const Auth = () => {
     const history = useHistory()
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
-    const handleChange = () => {
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value });
     }
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-    }
+        if (isSignup) {
+            dispatch(signup(form, history));
+        } else {
+            dispatch(signin(form, history));
+        }
+    };
     const switchMode = () => {
         setIsSignup((prevIsSignup) => !prevIsSignup)
     }
@@ -64,7 +75,7 @@ const Auth = () => {
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                         {isSignup ? 'Sign Up' : 'Sign In'}
                     </Button>
-                    <GoogleLogin
+                    {/* <GoogleLogin
                         clientId="262888704698-i48sthdevlhmho7ut15n6goc89t0ok9t.apps.googleusercontent.com"
                         render={(renderProps) => (
                             <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
@@ -74,7 +85,7 @@ const Auth = () => {
                         onSuccess={googleSuccess}
                         onFailure={googleError}
                         cookiePolicy="single_host_origin"
-                    />
+                    /> */}
                     <Grid container justify-Content="flex-end">
                         <Grid item>
                             <Button onClick={switchMode}>
