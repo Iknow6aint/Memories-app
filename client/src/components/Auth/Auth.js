@@ -6,12 +6,16 @@ import { GoogleLogin } from 'react-google-login';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Input from './Input';
 import useStles from './styles'
+import Icon from './icons'
+import * as actionType from '../../constants/actionType';
 
 
 const Auth = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isSignup, setIsSignup] = useState(false)
     const classes = useStles();
+    const dispatch = useDispatch()
+    const history = useHistory()
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
     const handleChange = () => {
@@ -22,11 +26,21 @@ const Auth = () => {
     const switchMode = () => {
         setIsSignup((prevIsSignup) => !prevIsSignup)
     }
-    const googleSuccess = () => {
+    const googleSuccess = async (res) => {
+        const result = res?.profileObj;
+        const token = res?.tokenId;
 
-    }
-    const googleError = () => {
+        try {
+            dispatch({ type: actionType.AUTH, data: { result, token } });
 
+            history.push('/');
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const googleError = (error) => {
+        console.log(error);
+        console.log("Google error");
     }
     return (
         <Container component="main" maxWidth="xs">
@@ -51,7 +65,7 @@ const Auth = () => {
                         {isSignup ? 'Sign Up' : 'Sign In'}
                     </Button>
                     <GoogleLogin
-                        clientId="564033717568-e5p23rhvcs4i6kffgsbci1d64r8hp6fn.apps.googleusercontent.com"
+                        clientId="262888704698-i48sthdevlhmho7ut15n6goc89t0ok9t.apps.googleusercontent.com"
                         render={(renderProps) => (
                             <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
                                 Google Sign In
