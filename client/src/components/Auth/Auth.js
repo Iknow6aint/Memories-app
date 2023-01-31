@@ -8,9 +8,10 @@ import Input from './Input';
 import useStles from './styles'
 import Icon from './icons'
 import * as actionType from '../../constants/actionType';
-const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
+
 import { signin, signup } from '../../actions/auth'
 
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
 
 const Auth = () => {
