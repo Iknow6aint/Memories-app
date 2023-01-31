@@ -26,6 +26,7 @@ const Auth = () => {
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     }
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -35,9 +36,12 @@ const Auth = () => {
             dispatch(signin(form, history));
         }
     };
+
     const switchMode = () => {
         setIsSignup((prevIsSignup) => !prevIsSignup)
+        setShowPassword(false);
     }
+
     const googleSuccess = async (res) => {
         const result = res?.profileObj;
         const token = res?.tokenId;
@@ -50,10 +54,12 @@ const Auth = () => {
             console.log(error);
         }
     };
+
     const googleError = (error) => {
         console.log(error);
         console.log("Google error");
     }
+
     return (
         <Container component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3}>
