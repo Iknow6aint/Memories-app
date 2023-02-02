@@ -8,7 +8,7 @@ postRouter.get('/', getPosts);
 postRouter.post('/', auth, createPost);
 postRouter.patch('/:id', auth, updatePost);
 postRouter.delete("/:id", auth, deletePost);
-postRouter.patch('/:id/likedPost', auth, likePost);
+postRouter.patch('/:id/likepost', auth, likePost);
 
 
 export default postRouter;
