@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import { getPosts } from '../../actions/posts';
+import { getPostBySearch, getPosts } from '../../actions/posts';
 import { Container, AppBar, Typography, TextField, Grow, Grid, Paper, Button } from '@material-ui/core';
 import Posts from '../Posts/Posts'
 import Form from "../Forms/Form"
@@ -34,6 +34,7 @@ const Home = () => {
     const searchPost = () => {
         if (search.trim()) {
             //dispatch acton
+            dispatch(getPostBySearch({ search, tags: tags.join(',') }))
         } else (
             history.push('/')
         )
