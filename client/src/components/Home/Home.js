@@ -35,6 +35,7 @@ const Home = () => {
         if (search.trim() || tags) {
             //dispatch acton
             dispatch(getPostBySearch({ search, tags: tags.join(',') }))
+            history.push(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
         } else (
             history.push('/')
         )
