@@ -11,6 +11,20 @@ export const getPosts = async (req, res) => {
         res.status(400).json({ message: error.message })
     }
 }
+export const getPostBySearch = async (req, res) => {
+    const { searchQuery, tags } = req.query;
+
+    try {
+        const title = new RegExp(searchQuery, 'i')
+
+        const posts = await PostMessage.find({ $or: [{ title }, { tags: { $in: tags.splid(',') } }] });
+
+        res.json({ data: posts });
+    } catch (error) {
+        res.status(404).json({ message: 'error in posting' })
+    }
+}
+
 export const createPost = async (req, res) => {
     const post = req.body;
 
