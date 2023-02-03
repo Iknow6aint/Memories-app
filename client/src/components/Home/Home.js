@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { getPosts } from '../../actions/posts';
-import { Container, AppBar, Typography, Grow, Grid, Paper } from '@material-ui/core';
+import { Container, AppBar, Typography, TextField, Grow, Grid, Paper, Button } from '@material-ui/core';
 import Posts from '../Posts/Posts'
 import Form from "../Forms/Form"
 import Pagination from '../Pagination'
@@ -30,18 +30,52 @@ const Home = () => {
 
     const classes = useStyles()
 
+    // search tags
+    const searchPost = () => {
+        if (search.trim()) {
+            //dispatch acton
+        } else (
+            history.push('/')
+        )
+    }
 
+    // handle tags
+    const handleAddChip = (tag) => setTags([...tags, tag]);
+
+    const handleDeleteChip = (deletedTag) => {
+        setTags(tags.filter((tag) => tag !== deletedTag))
+    }
+
+    //keyPress for enter
+    const handleKeyPress = (e) => {
+        if (e.keyCode === 13) {
+            //search post
+            searchPost()
+        }
+    }
     useEffect(() => {
         dispatch(getPosts())
     }, [dispatch, currentId])
     return (
         <Grow in>
-            <Container>
-                <Grid container direction="column-reverse" justifyContent="space-between" alignItems="stretch" spacing={3}>
-                    <Grid item xs={12} sm={7}>
+            <Container maxWidth='xl'>
+                <Grid container direction="column-reverse" justifyContent="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>
+                    <Grid item xs={12} sm={6} md={9}>
                         <Posts setCurrentId={setCurrentId} />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={6} md={3}>
+                        <AppBar className={classes.appBarSearch} position="static" color="inherit">
+                            <TextField onKeyDown={handleKeyPress} name="search" variant="outlined" label="Search Memories" fullWidth value={search} onChange={(e) => setSearch(e.target.value)} />
+                            <ChipInput
+                                style={{ margin: '10px 0' }}
+                                value={tags}
+                                onAdd={(chip) => handleAddChip(chip)}
+                                onDelete={(chip) => handleDeleteChip(chip)}
+                                label="Search Tags"
+                                variant="outlined"
+                            />
+                            <Button onClick={searchPost} className={classes.searchButton} variant="contained" color="primary">Search</Button>
+                        </AppBar>
                         <Form currentId={currentId} setCurrentId={setCurrentId} />
                         <Paper className={classes.pagination} elevation={6}>
                             <Pagination />
