@@ -32,7 +32,7 @@ const Home = () => {
 
     // search tags
     const searchPost = () => {
-        if (search.trim()) {
+        if (search.trim() || tags) {
             //dispatch acton
             dispatch(getPostBySearch({ search, tags: tags.join(',') }))
         } else (
