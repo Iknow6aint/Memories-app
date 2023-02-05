@@ -1,6 +1,18 @@
 import * as api from "../api"
-import { CREATE, DELETE, END_LOADING, FETCH_ALL, FETCH_BY_SEARCH, START_LOADING, UPDATE } from "../constants/actionType";
+import { CREATE, DELETE, END_LOADING, FETCH_ALL, FETCH_BY_SEARCH, START_LOADING, UPDATE, FETCH_POST } from "../constants/actionType";
 //action creators
+export const getPost = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: START_LOADING })
+        const { data } = await api.fetchPost(id);
+        const action = { type: FETCH_POST, payload: data }
+        dispatch(action);
+        dispatch({ type: END_LOADING })
+    } catch (error) {
+        console.log(error.message);
+    }
+
+}
 export const getPosts = () => async (dispatch) => {
     try {
         dispatch({ type: START_LOADING })

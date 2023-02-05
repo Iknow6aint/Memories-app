@@ -10,14 +10,17 @@ import useStyles from './styles';
 
 const PostDetails = () => {
 
-    useEffect(() => {
-        dispatch(getPost(id));
-    }, [id]);
     const { post, posts, isLoading } = useSelector((state) => state.posts);
     const dispatch = useDispatch();
     const history = useHistory();
     const classes = useStyles();
     const { id } = useParams();
+
+
+    useEffect(() => {
+        dispatch(getPost(id));
+    }, [id]);
+
     return (
         <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
             <div className={classes.card}>
