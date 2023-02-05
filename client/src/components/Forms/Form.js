@@ -4,6 +4,7 @@ import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost, updatePost } from '../../actions/posts';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -13,7 +14,7 @@ const Form = ({ currentId, setCurrentId }) => {
     const dispatch = useDispatch();
     const classes = useStyles();
     const [postData, setPostData] = useState({ title: '', message: '', tags: '', selectedFile: '' });
-
+    const history = useHistory();
     const user = JSON.parse(localStorage.getItem('profile'))
 
 
@@ -26,18 +27,20 @@ const Form = ({ currentId, setCurrentId }) => {
         if (post) setPostData(post);
     }, [post]);
     //handle submit 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        //dispatch post
-        if (currentId) {
-            dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }))
-        } else {
-            dispatch(createPost({ ...postData, name: user?.result?.name }))
-            console.log(postData);
-        }
-        clear()
 
-    }
+        if (currentId === 0) {
+            dispatch(createPost({ ...postData, name: user?.result?.name }, history));
+            clear();
+        } else {
+            dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
+            clear();
+        }
+    };
+
+
+
     if (!user?.result?.name) {
         return (
             <Paper className={classes.paper}>
