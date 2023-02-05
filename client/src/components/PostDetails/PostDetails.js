@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { useParams, useHistory } from 'react-router-dom';
 
-import { getPost, getPostsBySearch } from '../../actions/posts';
+import { getPost, getPostBySearch } from '../../actions/posts';
 import useStyles from './styles';
 
 
@@ -21,8 +21,14 @@ const PostDetails = () => {
         dispatch(getPost(id));
     }, [id]);
 
+    useEffect(() => {
+        if (post) {
+            dispatch(getPostBySearch({ search: 'none', tags: post?.tags.join(',') }));
+        }
+    }, [post]);
+
     if (!post) return null;
-    console.log(post);
+    console.log(posts);
 
     const openPost = (_id) => history.push(`/posts/${_id}`);
 
@@ -34,6 +40,8 @@ const PostDetails = () => {
         );
     }
 
+    const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
+    console.log(recommendedPosts);
     return (
         <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
             <div className={classes.card}>
@@ -53,7 +61,7 @@ const PostDetails = () => {
                     <img className={classes.media} src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
                 </div>
             </div>
-            {/* {!!recommendedPosts.length && (
+            {recommendedPosts?.length && (
                 <div className={classes.section}>
                     <Typography gutterBottom variant="h5">You might also like:</Typography>
                     <Divider />
@@ -69,7 +77,7 @@ const PostDetails = () => {
                         ))}
                     </div>
                 </div>
-            )} */}
+            )}
         </Paper>
     )
 }
