@@ -6,6 +6,7 @@ import { useParams, useHistory } from 'react-router-dom';
 
 import { getPost, getPostBySearch } from '../../actions/posts';
 import useStyles from './styles';
+import CommentSection from './CommentSection';
 
 
 const PostDetails = () => {
@@ -54,7 +55,9 @@ const PostDetails = () => {
                     <Divider style={{ margin: '20px 0' }} />
                     <Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>
                     <Divider style={{ margin: '20px 0' }} />
-                    <Typography variant="body1"><strong>Comments - coming soon!</strong></Typography>
+                    <Typography variant="body1"><strong>
+                        <CommentSection post={post} />
+                    </strong></Typography>
                     <Divider style={{ margin: '20px 0' }} />
                 </div>
                 <div className={classes.imageSection}>
