@@ -1,5 +1,5 @@
 import * as api from "../api"
-import { CREATE, DELETE, END_LOADING, FETCH_ALL, FETCH_BY_SEARCH, START_LOADING, UPDATE, FETCH_POST } from "../constants/actionType";
+import { CREATE, DELETE, END_LOADING, FETCH_ALL, FETCH_BY_SEARCH, START_LOADING, UPDATE, FETCH_POST, } from "../constants/actionType";
 //action creators
 export const getPost = (id) => async (dispatch) => {
     try {
