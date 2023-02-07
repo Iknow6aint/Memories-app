@@ -1,0 +1,28 @@
+{
+    "name": "memories-app",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "watch": " npm run server & npm run client",
+        "server": "npm run server --prefix server",
+        "client": "npm start --prefix client",
+        "install-client": "npm install --prefix client",
+        "install-server": "npm install --prefix server",
+        "install": "npm run install-client && npm install-server ",
+        "deploy": "npm run build --prefix client && npm start --prefix server",
+        "deploy-cluster": "npm run build --prefix client && npm run cluster --prefix server"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Iknow6aint/Memories-app.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Iknow6aint/Memories-app/issues"
+    },
+    "homepage": "https://github.com/Iknow6aint/Memories-app#readme"
+}
