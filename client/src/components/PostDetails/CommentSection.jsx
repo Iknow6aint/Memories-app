@@ -12,6 +12,7 @@ const CommentSection = ({ post }) => {
     const [comment, setComment] = useState('');
     const dispatch = useDispatch();
     const [comments, setComments] = useState(post?.comments);
+    console.log(post?.comments)
     const classes = useStyles();
     const commentsRef = useRef();
 
