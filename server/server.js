@@ -2,7 +2,7 @@ import cors from "cors"
 import bodyParser from "body-parser"
 import mongoose from "mongoose"
 import express from "express"
-
+import debug from "debug"
 import path from 'path'
 
 import postRoutes from './routes/posts.js'
@@ -11,7 +11,7 @@ import userRoutes from './routes/user.js'
 const app = express();
 const PORT = 5000
 
-
+debug(express);
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
