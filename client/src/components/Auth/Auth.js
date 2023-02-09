@@ -29,6 +29,20 @@ const Auth = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        // 
+        if (!form.email || !form.password) {
+            setError('Email and password are required fields');
+            return;
+        }
+        if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(form.email)) {
+            setError('Email is invalid');
+            return;
+        }
+
+        if (form.password.length < 8) {
+            setError('Password must be at least 8 characters long');
+            return;
+        }
 
         if (isSignup) {
             dispatch(signup(form, history));
