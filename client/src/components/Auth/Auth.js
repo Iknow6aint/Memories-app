@@ -17,6 +17,7 @@ const initialState = { firstName: '', lastName: '', email: '', password: '', con
 const Auth = () => {
     const [form, setForm] = useState(initialState);
     const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState(null);
     const [isSignup, setIsSignup] = useState(false)
     const classes = useStles();
     const dispatch = useDispatch()
