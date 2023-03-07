@@ -32,7 +32,9 @@ app.get('*', (req, res) => {
 });
 //mongoDB init
 
-const CONNECTION_URL = 'mongodb+srv://admin:Jajabone@cluster0.qzlrfzl.mongodb.net/?retryWrites=true&w=majority';
+const CONNECTION_URL = 'mongodb://127.0.0.1:27017/memories';
+//'mongodb+srv://admin:Jajabone@cluster0.qzlrfzl.mongodb.net/?retryWrites=true&w=majority' 
+
 mongoose
     .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() =>

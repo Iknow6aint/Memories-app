@@ -22,7 +22,7 @@ const auth = async (req, res, next) => {
 
         next();
     } catch (error) {
-        console.log(error);
+        throw new Error(" There is no token attached to header");
     }
 };
 
