@@ -38,8 +38,7 @@ app.get('*', (req, res) => {
 
 
 const CONNECTION_URL = 'mongodb+srv://admin:Jajabone@cluster0.qzlrfzl.mongodb.net/?retryWrites=true&w=majority'
-//'mongodb://127.0.0.1:27017/memories';
-//
+
 
 mongoose
     .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
